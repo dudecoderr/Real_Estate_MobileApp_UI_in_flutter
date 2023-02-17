@@ -4,6 +4,8 @@
         android:label="real_estate_flutterui"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyBslSv3BBnjN6hfX5qrHdXenvCQZ4I0HU0"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

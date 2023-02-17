@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'screens/home_page/home_page.dart';
 
-void main() {
+
+
+Future<void> main() async {
   runApp(const MyApp());
 }
 
@@ -21,11 +22,10 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              primarySwatch: Colors.green,
-            ),
+            theme: ThemeData(primarySwatch: Colors.red, fontFamily: 'montserrat'),
             home: HomePage(),
-          );
-        });
+        );
+      },
+    );
   }
 }

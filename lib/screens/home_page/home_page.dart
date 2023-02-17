@@ -1,10 +1,12 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:real_estate_flutterui/constant/color_constant.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:real_estate_flutterui/constant/list_constant.dart';
 import 'package:real_estate_flutterui/constant/string_constant.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import '../../constant/image_constant.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,6 +17,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int timeIndexSelected = 1;
+
+  final List<String> time = [
+    'JAN',
+    'FEB',
+    'MAR',
+    'APR',
+    'MAY',
+    'JUNE',
+    'JULY',
+    'AUG',
+    'SEP',
+    'OCT',
+    'NOV',
+    'DEC',
+  ];
+
   var _currentIndex = 0;
   void OnTapped(int index) {
     setState(() {
@@ -29,41 +48,6 @@ class _HomePageState extends State<HomePage> {
           gradient:
               LinearGradient(begin: Alignment.topRight, end: Alignment.bottomLeft, colors: [kDarkGreenColor, kGreenColor, kWhiteColor, kWhiteColor])),
       child: Scaffold(
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(bottom: 20.h, left: 20.w, right: 20.w),
-          child: Container(
-            decoration: BoxDecoration(color: kGreyBlueColor, borderRadius: BorderRadius.circular(20.r)),
-            height: 70,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30.r),
-              child: SalomonBottomBar(
-                currentIndex: _currentIndex,
-                onTap: (i) => setState(() => _currentIndex = i),
-                items: [
-                  /// Home
-                  SalomonBottomBarItem(
-                      icon: Icon(Icons.home),
-                      title: Text(
-                        "Home",
-                      ),
-                      selectedColor: kGreenColor,
-                      unselectedColor: kWhiteColor),
-
-                  /// Likes
-                  SalomonBottomBarItem(
-                      icon: Icon(Icons.chat_bubble_outline_rounded), title: Text("Likes"), selectedColor: Colors.pink, unselectedColor: kWhiteColor),
-
-                  /// Search
-                  SalomonBottomBarItem(
-                      icon: Icon(Icons.favorite_border_outlined), title: Text("Search"), selectedColor: Colors.orange, unselectedColor: kWhiteColor),
-
-                  /// Profile
-                  SalomonBottomBarItem(icon: Icon(Icons.person), title: Text("Profile"), selectedColor: Colors.teal, unselectedColor: kWhiteColor),
-                ],
-              ),
-            ),
-          ),
-        ),
         backgroundColor: Colors.transparent,
         body: Container(
           child: Column(
@@ -107,62 +91,196 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ]),
               ),
-              Stack(
-                children: [
-                  Container(color: Colors.yellow,
-                    height: 250.h,
-                    width: 700.w,
-                    child: LineChart(
-                      mainData(),
+              AnimationLimiter(
+                child: Column(
+                  children: AnimationConfiguration.toStaggeredList(
+                    duration: const Duration(seconds: 2),
+                    childAnimationBuilder: (widget) => SlideAnimation(
+                      verticalOffset: MediaQuery.of(context).size.width / 2,
+                      child: FadeInAnimation(child: widget),
                     ),
-                  ),
-                  Positioned(child: Wrap(
-                    children: SelectPositionList.map(
-                          (hobby) {
-                        bool isSelected = false;
-                        if (SelectPosition!.contains(hobby)) {
-                          isSelected = true;
-                        }
-                        return GestureDetector(
-                          onTap: () {
-                            if (!SelectPosition!.contains(hobby)) {
-                              if (SelectPosition!.length < 4) {
-                                SelectPosition!.add(hobby);
-                                setState(() {});
-                                print(SelectPosition);
-                              }
-                            } else {
-                              SelectPosition!.removeWhere(
-                                      (element) => element == hobby);
-                              setState(() {});
-                              print(SelectPosition);
-                            }
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(18),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: isSelected
-                                    ? Colors.greenAccent.shade100
-                                    : Colors.grey.shade200,
-                                borderRadius: BorderRadius.circular(18.r),
+                    children: [
+                      Stack(
+                        children: [
+                          SizedBox(
+                            height: 250.h,
+                            child: LineChart(
+                              mainData(),
+                            ),
+                          ),
+                          Positioned(
+                            top: 250,
+                            child: SizedBox(
+                              height: 35.h,
+                              width: 500,
+                              child: ListView.builder(
+                                itemCount: 12,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        timeIndexSelected = index;
+                                      });
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.only(left: 9.w, right: 9.w),
+                                      child: Container(
+                                        height: 35.h,
+                                        width: 80.w,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(12.sp),
+                                            border: Border.all(color: index == timeIndexSelected ? Colors.white : Colors.white),
+                                            color: timeIndexSelected == index ? kBlackColor : Colors.transparent),
+                                        child: Center(
+                                            child: Text(time[index],
+                                                style: TextStyle(
+                                                    color: index == timeIndexSelected ? kWhiteColor : kBlackColor,
+                                                    fontSize: 16.sp,
+                                                    fontWeight: FontWeight.w500))),
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
-                              padding: EdgeInsets.all(14),
-                              child: Text(
-                                hobby,
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 15.sp),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              AnimationLimiter(
+                child: Column(
+                  children: AnimationConfiguration.toStaggeredList(
+                    duration: const Duration(seconds: 3),
+                    childAnimationBuilder: (widget) => SlideAnimation(
+                      verticalOffset: MediaQuery.of(context).size.width / 2,
+                      child: FadeInAnimation(child: widget),
+                    ),
+                    children: [
+                      Stack(
+                        children: [
+                          AnimationLimiter(
+                            child: Column(
+                              children: AnimationConfiguration.toStaggeredList(
+                                duration: const Duration(seconds: 2),
+                                childAnimationBuilder: (widget) => SlideAnimation(
+                                  verticalOffset: MediaQuery.of(context).size.width / 2,
+                                  child: FadeInAnimation(child: widget),
+                                ),
+                                children: [
+                                  Container(
+                                      height: 343,
+                                      width: 500,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(top: 20.h),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.only(left: 20.w),
+                                              child: Text(
+                                                district,
+                                                style: TextStyle(
+                                                  fontFamily: "Mulish",
+                                                  color: kBlackColor,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 25.sp,
+                                                ),
+                                              ),
+                                            ),
+                                            AnimationLimiter(
+                                              child: Column(
+                                                children: AnimationConfiguration.toStaggeredList(
+                                                  duration: const Duration(seconds: 1),
+                                                  childAnimationBuilder: (widget) => SlideAnimation(
+                                                    verticalOffset: MediaQuery.of(context).size.width / 2,
+                                                    child: FadeInAnimation(child: widget),
+                                                  ),
+                                                  children: [
+                                                    const ListStock(),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )),
+                                ],
                               ),
                             ),
                           ),
-                        );
-                      },
-                    ).toList(),
-                  ),)
-                ],
+                          Positioned(
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 20.w, left: 20.w, top: 220.h),
+                              child: Container(
+                                  height: 60.h,
+                                  padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                                  decoration: BoxDecoration(color: kGreyBlueColor, borderRadius: BorderRadius.circular(20.r)),
+                                  child: const GNav(
+                                      tabBorderRadius: 15, // tab button border// tab button border
+                                      curve: Curves.easeOutExpo, // tab animation curves
+                                      duration: Duration(milliseconds: 900), // tab animation duration
+                                      gap: 8, // the tab button gap between icon and text
+                                      activeColor: kBlackColor, // selected icon and text color
+                                      iconSize: 24, // ta button icon size
+                                      tabBackgroundColor: kGreenColor,
+                                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                                      tabs: [
+                                        GButton(
+                                          icon: Icons.bar_chart,
+                                          text: 'Market',
+                                          textStyle: TextStyle(
+                                            fontFamily: "Mulish",
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                          iconColor: kWhiteColor,
+                                        ),
+                                        GButton(
+                                          icon: Icons.chat,
+                                          iconColor: kWhiteColor,
+                                          textStyle: TextStyle(
+                                            fontFamily: "Mulish",
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                          text: 'Chats',
+                                        ),
+                                        GButton(
+                                          icon: Icons.favorite_border_outlined,
+                                          text: 'Likes',
+                                          iconColor: kWhiteColor,
+                                          textStyle: TextStyle(
+                                            fontFamily: "Mulish",
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                        ),
+                                        GButton(
+                                          icon: Icons.person,
+                                          iconColor: kWhiteColor,
+                                          textStyle: TextStyle(
+                                            fontFamily: "Mulish",
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                          text: 'Profile',
+                                        )
+                                      ])),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
+
               //
-            ],),
+            ],
+          ),
         ),
       ),
     );
@@ -256,7 +374,7 @@ class _HomePageState extends State<HomePage> {
         ),
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
-            showTitles:false,
+            showTitles: false,
             reservedSize: 150,
             interval: 1,
             getTitlesWidget: bottomTitleWidgets,
