@@ -31,8 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-    ##====================Screen utils============##
-    flutter_screenutil: ^5.6.1
+  ##====================Screen utils============##
+  flutter_screenutil: ^5.6.1
 
   ##==================== Bottom navbar============##
   salomon_bottom_bar: ^3.3.1
