@@ -1,3 +1,4 @@
+import 'package:favorite_button/favorite_button.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -88,10 +89,14 @@ class _SubOceanPageState extends State<SubOceanPage> {
                         ),
                         height: 45.h,
                         width: 45.w,
-                        child: const Icon(
-                          Icons.favorite_border_outlined,
-                          color: kWhiteColor,
-                        )),
+                        child:  FavoriteButton(iconSize: 35,
+                          isFavorite: true,
+                          iconColor: Colors.white,
+                           iconDisabledColor: Colors.grey,
+                          valueChanged: (_isFavorite) {
+                            print('Is Favorite : $_isFavorite');
+                          },
+                        ),),
                   ],
                 ),
               ),

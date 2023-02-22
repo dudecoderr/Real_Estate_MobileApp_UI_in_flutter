@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(primarySwatch: Colors.red, fontFamily: 'montserrat'),
-            home: HomePage(),
+            home: const HomePage(),
         );
       },
     );

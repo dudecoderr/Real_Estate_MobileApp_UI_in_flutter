@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: 20.h,
+                height: 5.h,
               ),
               Padding(
                 padding: EdgeInsets.only(right: 30.w, left: 30.w),
@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Positioned(
-                            top: 250,
+                            top: 240,
                             child: SizedBox(
                               height: 35.h,
                               width: 500,
@@ -217,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Positioned(
                             child: Padding(
-                              padding: EdgeInsets.only(right: 20.w, left: 20.w, top: 220.h),
+                              padding: EdgeInsets.only(right:10.w, left: 10.w, top: 220.h),
                               child: Container(
                                   height: 60.h,
                                   padding: EdgeInsets.only(left: 10.w, right: 10.w),
@@ -413,12 +413,14 @@ class _HomePageState extends State<HomePage> {
             colors: gradientColors,
           ),
           barWidth: 5,
+          show: true,
           isStrokeCapRound: true,
           dotData: FlDotData(
             show: false,
           ),
           belowBarData: BarAreaData(
             show: true,
+
             gradient: LinearGradient(
               colors: gradientColors.map((color) => color.withOpacity(0.10)).toList(),
             ),
