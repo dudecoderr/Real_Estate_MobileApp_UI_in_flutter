@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:real_estate_flutterui/constant/color_constant.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:real_estate_flutterui/constant/list_constant.dart';
 import 'package:real_estate_flutterui/constant/string_constant.dart';
 import '../../constant/image_constant.dart';
@@ -151,9 +150,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 5,
-              ),
               AnimationLimiter(
                 child: Column(
                   children: AnimationConfiguration.toStaggeredList(
@@ -219,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                             child: Padding(
                               padding: EdgeInsets.only(right:10.w, left: 10.w, top: 220.h),
                               child: Container(
-                                  height: 60.h,
+                                  height: 65.h,
                                   padding: EdgeInsets.only(left: 10.w, right: 10.w),
                                   decoration: BoxDecoration(color: kGreyBlueColor, borderRadius: BorderRadius.circular(20.r)),
                                   child: const GNav(
@@ -235,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                                         GButton(
                                           icon: Icons.bar_chart,
                                           text: 'Market',
-                                          textStyle: TextStyle(
+                                          textStyle: TextStyle(  fontSize: 18,
                                             fontFamily: "Mulish",
                                             fontWeight: FontWeight.w800,
                                           ),
@@ -244,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                                         GButton(
                                           icon: Icons.chat,
                                           iconColor: kWhiteColor,
-                                          textStyle: TextStyle(
+                                          textStyle: TextStyle(  fontSize: 18,
                                             fontFamily: "Mulish",
                                             fontWeight: FontWeight.w800,
                                           ),
@@ -256,6 +252,7 @@ class _HomePageState extends State<HomePage> {
                                           iconColor: kWhiteColor,
                                           textStyle: TextStyle(
                                             fontFamily: "Mulish",
+                                            fontSize: 18,
                                             fontWeight: FontWeight.w800,
                                           ),
                                         ),
@@ -263,7 +260,7 @@ class _HomePageState extends State<HomePage> {
                                           icon: Icons.person,
                                           iconColor: kWhiteColor,
                                           textStyle: TextStyle(
-                                            fontFamily: "Mulish",
+                                            fontFamily: "Mulish",fontSize: 18,
                                             fontWeight: FontWeight.w800,
                                           ),
                                           text: 'Profile',
