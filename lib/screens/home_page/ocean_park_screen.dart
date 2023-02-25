@@ -25,7 +25,7 @@ class OceanParkPageState extends State<OceanParkPage> {
       body: Stack(
         children: <Widget>[
           _buildGoogleMap(context),
-          // _zoomminusfunction(),
+          // _zoomm.inusfunction(),
           // _zoomplusfunction(),
           _buildContainer(),
 

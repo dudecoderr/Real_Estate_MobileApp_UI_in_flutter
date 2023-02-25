@@ -13,7 +13,7 @@ class ListStock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 210.h,
+      height: 220.h,
       child: ListView.builder(
         itemCount: 2,
         itemBuilder: (BuildContext context, int index) {
