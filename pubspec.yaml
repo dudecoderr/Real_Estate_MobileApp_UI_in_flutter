@@ -49,7 +49,7 @@ dependencies:
   geolocator: ^9.0.1
   flutter_google_places: ^0.3.0
   font_awesome_flutter: ^10.2.1
-  google_maps_flutter: ^2.2.3
+  google_maps_flutter: ^2.2.5
 
   ##=====================circular indicator================##
   percent_indicator: ^4.2.2

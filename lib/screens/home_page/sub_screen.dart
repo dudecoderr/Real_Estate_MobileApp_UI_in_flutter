@@ -92,7 +92,7 @@ class _SubOceanPageState extends State<SubOceanPage> {
                         child:  FavoriteButton(iconSize: 35,
                           isFavorite: true,
                           iconColor: Colors.white,
-                           iconDisabledColor: Colors.grey,
+                           iconDisabledColor: Colors.red,
                           valueChanged: (_isFavorite) {
                             print('Is Favorite : $_isFavorite');
                           },
@@ -108,11 +108,11 @@ class _SubOceanPageState extends State<SubOceanPage> {
                 child: Row(children: [
                   Text(
                     week1,
-                    style: TextStyle(color: kWhiteColor, fontFamily: "Mulish", fontWeight: FontWeight.w700, fontSize: 30.h),
+                    style: TextStyle(color: kWhiteColor, fontFamily: "Mulish", fontWeight: FontWeight.w700, fontSize: 30.sp),
                   ),
                   Text(
                     week,
-                    style: TextStyle(color: kWhiteColor, fontFamily: "Mulish", fontWeight: FontWeight.w600, fontSize: 16.h),
+                    style: TextStyle(color: kWhiteColor, fontFamily: "Mulish", fontWeight: FontWeight.w600, fontSize: 16.sp),
                   ),
                 ]),
               ),

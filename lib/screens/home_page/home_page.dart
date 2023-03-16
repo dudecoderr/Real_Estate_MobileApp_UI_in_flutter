@@ -82,11 +82,11 @@ class _HomePageState extends State<HomePage> {
                 child: Row(children: [
                   Text(
                     week1,
-                    style: TextStyle(color: kWhiteColor, fontFamily: "Mulish", fontWeight: FontWeight.w700, fontSize: 30.h),
+                    style: TextStyle(color: kWhiteColor, fontFamily: "Mulish", fontWeight: FontWeight.w700, fontSize: 30.sp),
                   ),
                   Text(
                     week,
-                    style: TextStyle(color: kWhiteColor, fontFamily: "Mulish", fontWeight: FontWeight.w600, fontSize: 16.h),
+                    style: TextStyle(color: kWhiteColor, fontFamily: "Mulish", fontWeight: FontWeight.w600, fontSize: 16.sp),
                   ),
                 ]),
               ),
@@ -171,8 +171,8 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 children: [
                                   Container(
-                                      height: 343,
-                                      width: 500,
+                                      height: 310.h,
+                                      width: 500.w,
                                       child: Padding(
                                         padding: EdgeInsets.only(top: 20.h),
                                         child: Column(

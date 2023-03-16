@@ -21,6 +21,7 @@ class ListStock extends StatelessWidget {
             children:  [
                StockList(
                 function: (){
+                  print('print====================');
                   Navigator.push(
                     context,
                     MaterialPageRoute(
